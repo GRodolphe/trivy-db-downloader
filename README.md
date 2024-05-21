@@ -12,7 +12,7 @@ This script queries the GitHub Container Registry API to get access tokens, list
    git clone https://github.com/GhioRodolphe/trivy-db-downloader.git
    cd trivy-db-downloader
    chmod +x get-trivy-db.sh
-   ./Get-TrivyDB.ps1
+   ./get-trivy-db.sh
    ```
 2. Windows
    ```powershell
