@@ -1,10 +1,30 @@
 # Trivy Database Downloader
 
 ## Synopsis
-This script downloads the Trivy database without using Docker or Oras as described in the Trivy documentation in restrited environments. See: [Trivy Air-Gap Documentation](https://aquasecurity.github.io/trivy/v0.42/docs/advanced/air-gap/#transfer-the-db-files-into-the-air-gapped-environment).
+This script downloads the Trivy database without using Docker or Oras as described in the Trivy documentation in restricted environments. See: [Trivy Air-Gap Documentation](https://aquasecurity.github.io/trivy/v0.42/docs/advanced/air-gap/#transfer-the-db-files-into-the-air-gapped-environment).
 
 ## Description
 This script queries the GitHub Container Registry API to get access tokens, lists the available tags for the desired Trivy databases (trivy-db and trivy-java-db), allows the user to select a specific tag, and downloads the corresponding database using system or custom proxy settings. 
+
+## Prerequisites
+### Linux
+- `curl` - for making HTTP requests
+- `jq` - for parsing JSON responses
+
+Install on Ubuntu/Debian:
+```sh
+sudo apt-get update
+sudo apt-get install curl jq
+```
+
+Install on RHEL/CentOS/Fedora:
+```sh
+sudo yum install curl jq
+```
+
+### Windows
+- PowerShell 5.1 or higher (included with Windows 10/11)
+- Internet connectivity
 
 ## Usage
 1. Linux

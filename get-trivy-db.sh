@@ -1,6 +1,6 @@
 #!/bin/bash
 
-'
+: '
 .SYNOPSIS
 This script downloads the Trivy database without using Docker or Oras as described
 in the Trivy documentation for air-gapped environments. See: https://aquasecurity.github.io/trivy/v0.42/docs/advanced/air-gap/#transfer-the-db-files-into-the-air-gapped-environment
@@ -10,7 +10,7 @@ This script queries the GitHub Container Registry API to get access tokens, list
   - manifestFile-trivy-db.json
   - trivy-db.tar.gz
   - manifestFile-trivy-java-db.json
-  - manifestFile-trivy-java-db.tar.gz
+  - trivy-java-db.tar.gz
 
 .REFERENCES
   - https://oras.land/docs/commands/oras_pull/
@@ -82,7 +82,7 @@ main() {
         fi
 
         local tags
-        if ! tags=$(get_repository_tags("${repository}" "${token}")); then
+        if ! tags=$(get_repository_tags "${repository}" "${token}"); then
             printf >&2 "Error obtaining tags for %s\n" "${repository}"
             continue
         fi
@@ -91,7 +91,7 @@ main() {
         printf "> Please enter the tag you wish to download: "
         read -r selected_tag
 
-        if [[ -z "${selected_tag}" || ! ${tags} =~ ${selected_tag} ]]; then
+        if [[ -z "${selected_tag}" ]] || ! echo "${tags}" | grep -q "^${selected_tag}$"; then
             printf >&2 "Error: The specified tag is not available. Please try again.\n"
             continue
         fi
